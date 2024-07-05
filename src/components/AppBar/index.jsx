@@ -4,17 +4,17 @@ import AppsIcon from '@mui/icons-material/Apps'
 import { ReactComponent as TrelloLogo } from '~/assets/trello.svg'
 import SvgIcon from '@mui/material/SvgIcon'
 import Typography from '@mui/material/Typography'
-import Workspaces from '~/components/AppBar/Menus/Workspaces'
-import Recent from '~/components/AppBar/Menus/Recent'
-import Starred from '~/components/AppBar/Menus/Starred'
-import Templates from '~/components/AppBar/Menus/Templates'
+import Workspaces from '~/components/AppBar/Menu/Workspaces'
+import Recent from '~/components/AppBar/Menu/Recent'
+import Starred from '~/components/AppBar/Menu/Starred'
+import Templates from '~/components/AppBar/Menu/Templates'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Badge from '@mui/material/Badge'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
-import Profiles from './Menus/Profiles'
+import Profiles from './Menu/Profiles'
 
 function AppBar() {
   return (
@@ -28,7 +28,7 @@ function AppBar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <AppsIcon sx={{ color: 'primary.main' }}/>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <SvgIcon component={TrelloLogo} inheritViewBox sx={{ color: 'primary.main' }}/>
+          <SvgIcon component={TrelloLogo} fontSize='small' inheritViewBox sx={{ color: 'primary.main' }}/>
           <Typography variant='span' sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'primary.main' }}>Trello</Typography>
         </Box>
 
@@ -44,15 +44,15 @@ function AppBar() {
         <TextField id="outlined-search" label="Search..." type="search" size='small' />
         <ModeSelect/>
 
-        <Tooltip title="Notification">
+        <Tooltip title="Notifications">
           <Badge color="secondary" variant="dot" sx={{ cursor: 'pointer' }}>
-            <NotificationsNoneIcon />
+            <NotificationsNoneIcon sx={{ color: 'primary.main' }} />
           </Badge>
         </Tooltip>
 
         <Tooltip title="Help">
           <Badge sx={{ cursor: 'pointer' }}>
-            <HelpOutlineIcon />
+            <HelpOutlineIcon sx={{ color: 'primary.main' }} />
           </Badge>
         </Tooltip>
 

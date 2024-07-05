@@ -39,6 +39,7 @@ function Profiles() {
           />
         </IconButton>
       </Tooltip>
+
       <Menu
         id="basic-menu-profiles"
         anchorEl={anchorEl}
