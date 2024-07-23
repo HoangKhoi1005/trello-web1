@@ -10,6 +10,7 @@ import AvatarGroup from '@mui/material/AvatarGroup'
 import { Tooltip } from '@mui/material'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { capitalizeFirstLetter } from '~/utils/formatters'
 
 const MENU_STYLES = {
   color:'white',
@@ -25,7 +26,7 @@ const MENU_STYLES = {
   }
 }
 
-function BoardBar() {
+function BoardBar({ board }) { // Nhận props board từ component cha, ở đây là src/pages/Boards/_id.jsx, và sử dụng props đó để render ra giao diện. Object destructuring là một cách viết code gọn hơn, dễ đọc hơn, và dễ hiểu hơn, giúp bạn truy cập vào các thuộc tính của object một cách nhanh chóng và dễ dàng hơn., ví dụ: const { board } = props, tương đương với const board = props.board, nhưng cách viết này ngắn gọn hơn.
   return (
     <Box sx={{
       width: '100%',
@@ -42,13 +43,13 @@ function BoardBar() {
         <Chip
           sx={MENU_STYLES}
           icon={<DashboardIcon />}
-          label="HoangKhoiDev"
+          label= {board?.title}
           clickable
         />
         <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label= {capitalizeFirstLetter(board?.type)}
           clickable
         />
         <Chip
