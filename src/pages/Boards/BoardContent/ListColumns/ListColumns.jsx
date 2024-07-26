@@ -6,6 +6,7 @@ import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortabl
 
 function ListColumns({ columns }) {
   /**
+   * SortableContext dùng để xác định vùng kéo thả, items là mảng các id của các column
    * SortableContext yêu cầu items là một mảng dạng ['id-1', 'id-2', ...] chứ không phải là mảng object như columns
    * Nếu không thì vẫn kéo thả được nhưng không có hiệu ứng animation
    */
