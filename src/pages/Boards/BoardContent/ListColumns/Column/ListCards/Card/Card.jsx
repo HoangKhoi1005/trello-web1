@@ -20,7 +20,8 @@ function Card({ card }) {
     // Nếu dùng CSS.Tranform.toString thì sẽ bị lỗi vì nó trả về dạng 'translate(0px, 0px)' thay vì 'translate(0px, 0px) scale(1)'
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : undefined
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '1px solid #2ecc71' : undefined
   }
 
   const shouldShowCardActions = () => {
