@@ -8,7 +8,9 @@ import { DndContext,
   useSensor,
   useSensors,
   DragOverlay,
-  defaultDropAnimationSideEffects } from '@dnd-kit/core'
+  defaultDropAnimationSideEffects,
+  closestCorners
+} from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { useEffect, useState } from 'react'
 import Column from './ListColumns/Column/Column'
@@ -163,7 +165,10 @@ function BoardContent({ board }) {
   return (
     // DndContext: cung cấp context để xác định vùng kéo thả, sensors: xác định loại sensor sử dụng, onDragStart: trigger khi bắt đầu kéo, onDragEnd: trigger khi kết thúc kéo
     <DndContext
+      // sensors: Cảm biến để xác định vị trí con trỏ chuột hoặc cảm ứng, ở đây sử dụng cảm biến chuột và cảm ứng
       sensors={sensors}
+      // closestCorners: Thuật toán phát hiện va chạm, ở đây sử dụng thuật toán góc gần nhất (nếu không có thì card với cover lớn sẽ không kéo qua được column khác vì lúc này đang bị conflict giữa card và column)
+      collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
