@@ -11,9 +11,9 @@ import { DndContext,
   defaultDropAnimationSideEffects,
   closestCorners,
   pointerWithin,
-  rectIntersection,
-  getFirstCollision,
-  closestCenter
+  // rectIntersection,
+  // closestCenter,
+  getFirstCollision
 } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -265,20 +265,25 @@ function BoardContent({ board }) {
       return closestCorners({ ...args })
     }
 
-    // Tìm các vị trí va chạm của pointer với con trỏ
+    // Tìm các vị trí va chạm của pointer với con trỏ, trả về mảng các vị trí va chạm
     const pointerIntersections = pointerWithin(args)
-    const intersections = !!pointerIntersections?.length
-      ? pointerIntersections
-      : rectIntersection(args)
+
+    // Nếu không tìm thấy thì return mảng rỗng
+    if (!pointerIntersections?.length) return
+
+    // Tìm các vị trí va chạm của pointer với các hình chữ nhật, trả về mảng các vị trí va chạm
+    // const intersections = !!pointerIntersections?.length
+    //   ? pointerIntersections
+    //   : rectIntersection(args)
 
     // Tìm overId: id của phần tử bị kéo qua
-    let overId = getFirstCollision(intersections, 'id')
+    let overId = getFirstCollision(pointerIntersections, 'id')
     if (overId) {
-      // Nếu over là column thì tìm cardId gần nhất bên trong khu vực va chạm đó dựa vào thuật toán phát hiện va chạm closestCorners hoặc closestCenter đều được. Tuy nhiên ở đây sử dụng closestCenter sẽ mượt hơn
+      // Nếu over là column thì tìm cardId gần nhất bên trong khu vực va chạm đó dựa vào thuật toán phát hiện va chạm closestCorners hoặc closestCenter đều được. Tuy nhiên ở đây sử dụng closestCorners sẽ mượt hơn
       const checkColumn = orderedColumns.find(column => column._id === overId)
       if (checkColumn) {
         // console.log('overId before: ', overId)
-        overId = closestCenter({
+        overId = closestCorners({
           ...args,
           droppableContainers: args.droppableContainers.filter(container => {
             return (container.id !== overId) && (checkColumn?.cardOrderIds?.includes(container.id))
